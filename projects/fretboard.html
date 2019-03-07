@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Fretboard | Scales</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <style>
+
+      table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td, table.table-striped.table-bordered.dt-responsive th, table.table-striped.table-bordered.dt-responsive td {
+         /* color: #333; */
+         font-family: Arial, Helvetica, sans-serif;
+         font-size: 16px;
+         font-weight: bold;
+      }
+        .badge{
+          background-color: white !important;
+          color: #333;
+        }
+      
+      td {
+          width: 80px;
+          color:#293f55;
+      }
+
+      .header {
+        background-color:#293f55 !important;
+        color : #CCC;
+      }
+      .root {
+        background-color:#4788c9;
+        color : #CCC;
+      }
+      .scales tr:hover {
+        background-color: #ccc !important;
+        color : white !important;
+        font-style: bold;
+      }
+
+      .selected {
+        background-color: #ca0000!important;
+        color : white !important;
+      }
+    </style>
+
+    <!-- Scripts -->
+    <script>  
+        // Load myFretboard function when the page is first loaded - Default Note is C taken from the dropdown
+        window.onload = myFretboard;
+
+        function myFretboard() {
+      
+        // Setting Variables for the Musical Alphabet  
+        // The Root Note in the Alphabet will change depending on option selection
+        var alphabet = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+        
+        // Lookup Table
+        var lookupTable = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];        
+
+
+          // Reading myNote Selected from the Drop-down Menu and assigning it to "note"
+          var note = document.getElementById("myNote").value;
+        
+          // Finiding the "note" position of the in the array
+          var keyPosition = alphabet.indexOf(note);
+
+          // assign not as root.
+          var rootNote = note;
+          console.log(rootNote);
+
+
+          // Shift Table startig with selected root note
+          var x = 12 - keyPosition;
+          for (var i = 0; i < x; i++) {
+            alphabet.unshift(alphabet.pop());
+          }
+          document.getElementById("shiftedTable").innerHTML = "Shifted Table: " + alphabet;
+        
+          // var majorScale = [0, 2, 4, 5, 7, 9, 11];
+          // var minorScale = [0, 2, 3, 5, 7, 8, 10];
+          // var penMajorScale = [0, 2, 4, 7, 9];
+          // var penMinorScale = [0, 3, 5, 7, 10];
+          // var bluesScale = [0, 3, 5, 6, 7, 10];
+        
+          // Music Scales Tables
+           var majorScaleTable = "<td>Major</td><td>" + alphabet[0] + "</td><td>" + alphabet[2] + "</td><td>" + alphabet[4] + "</td><td>" + alphabet[5] + "</td><td>" + alphabet[7] + "</td><td>" + alphabet[9] + "</td><td>" + alphabet[11] + "</td>";
+           var minorScaleTable = "<td>Minor</td><td>" + alphabet[0] + "</td><td>" + alphabet[2] + "</td><td>" + alphabet[3] + "</td><td>" + alphabet[5] + "</td><td>" + alphabet[7] + "</td><td>" + alphabet[8] + "</td><td>" + alphabet[10] + "</td>";
+           var penMajorScaleTable = "<td>Major Pentatonic</td><td>" + alphabet[0] + "</td><td>" + alphabet[2] + "</td><td>" + alphabet[4] + "</td><td>" + alphabet[7] + "</td><td>" + alphabet[9] + "</td>" + "<td></td><td></td>";
+           var penMinorScaleTable = "<td>Minor Pentatonic</td><td>" + alphabet[0] + "</td><td>" + alphabet[3] + "</td><td>" + alphabet[5] + "</td><td>" + alphabet[7] + "</td><td>" + alphabet[10] + "</td>" + "<td></td><td></td>";
+           var bluesScaleTable = "<td>Blues</td><td>" + alphabet[0] + "</td><td>" + alphabet[3] + "</td><td>" + alphabet[5] + "</td><td>" + alphabet[6] + "</td><td>" + alphabet[7] + "</td>" + "<td>" + alphabet[10] + "</td>" + "<td></td>";
+          
+          // Fretboard Strings
+          var string6 = "<td>" + lookupTable[4] + "</td><td>" + lookupTable[5] + "</td><td>" + lookupTable[6] + "</td><td>"  + lookupTable[7] + "</td><td>" + lookupTable[8] + "</td><td>" + lookupTable[9] + "</td><td>" + lookupTable[10] + "</td><td>" + lookupTable[11] + "</td><td>" + lookupTable[0] + "</td><td>"  + lookupTable[1] + "</td><td>" + lookupTable[2] + "</td><td>" + lookupTable[3] + "</td><td>" + lookupTable[4] + "</td>";
+          var string5 = "<td>" + lookupTable[11] + "</td><td>" + lookupTable[0] + "</td><td>" + lookupTable[1] + "</td><td>"  + lookupTable[2] + "</td><td>" + lookupTable[3] + "</td><td>" + lookupTable[4] + "</td><td>" + lookupTable[5] + "</td><td>" + lookupTable[6] + "</td><td>" + lookupTable[7] + "</td><td>"  + lookupTable[8] + "</td><td>" + lookupTable[9] + "</td><td>" + lookupTable[10] +"</td><td>" + lookupTable[11] + "</td>";
+          var string4 = "<td>" + lookupTable[7] + "</td><td>" + lookupTable[8] + "</td><td>" + lookupTable[9] + "</td><td>"  + lookupTable[10] + "</td><td>" + lookupTable[11] + "</td><td>" + lookupTable[0] + "</td><td>"+ lookupTable[1] + "</td><td>" + lookupTable[2] + "</td><td>" + lookupTable[3] + "</td><td>"  + lookupTable[4] + "</td><td>" + lookupTable[5] + "</td><td>" + lookupTable[6] +"</td><td>" + lookupTable[7] + "</td>";
+          var string3 = "<td>" + lookupTable[2] + "</td><td>" + lookupTable[3] + "</td><td>" + lookupTable[4] + "</td><td>"  + lookupTable[5] + "</td><td>" + lookupTable[6] + "</td><td>" +lookupTable[7] + "</td><td>" + lookupTable[8] + "</td><td>" + lookupTable[9] + "</td><td>" + lookupTable[10] + "</td><td>"  + lookupTable[11] + "</td><td>" + lookupTable[0] + "</td><td>" + lookupTable[1] +"</td><td>" + lookupTable[2] + "</td>";
+          var string2 = "<td>" + lookupTable[9] + "</td><td>" + lookupTable[10] + "</td><td>" + lookupTable[11] + "</td><td>"  + lookupTable[0] + "</td><td>" + lookupTable[1] + "</td><td>" + lookupTable[2] + "</td><td>" + lookupTable[3] + "</td><td>" + lookupTable[4] + "</td><td>" + lookupTable[5] + "</td><td>"  + lookupTable[6] + "</td><td>" + lookupTable[7] + "</td><td>" + lookupTable[8] +"</td><td>" + lookupTable[9] + "</td>";
+          var string1 = "<td>" + lookupTable[4] + "</td><td>" + lookupTable[5] + "</td><td>" + lookupTable[6] + "</td><td>"  + lookupTable[7] + "</td><td>" + lookupTable[8] + "</td><td>" + lookupTable[9] + "</td><td>" + lookupTable[10] + "</td><td>" + lookupTable[11] + "</td><td>" + lookupTable[0] + "</td><td>"  + lookupTable[1] + "</td><td>" + lookupTable[2] + "</td><td>" + lookupTable[3] +"</td><td>" + lookupTable[4] + "</td>";
+
+          
+          // Display Lookup Table and Key Position
+          document.getElementById("lookupTable").innerHTML = "Lookup Table: " + lookupTable;
+          document.getElementById("guitar").innerHTML = "Note " + note + " is in position [" + keyPosition + "] on the lookup table.";
+          
+
+          // Show Scales
+          function showMajorScale(params) {                   
+            for (i=0; i<params.length; i++) {
+              document.getElementById("majorScaleTable").innerHTML = params;
+            }
+          }
+          
+          function showMinorScale(params) {                   
+            for (i=0; i<params.length; i++) {
+              document.getElementById("minorScaleTable").innerHTML = params;
+            }
+          }
+
+          function showPenMajorScale(params) {                   
+            for (i=0; i<params.length; i++) {
+              document.getElementById("penMajorScaleTable").innerHTML = params;
+            }
+          }
+
+          function showPenMinorScale(params) {                   
+            for (i=0; i<params.length; i++) {
+              document.getElementById("penMinorScaleTable").innerHTML = params;
+            }
+          }                 
+           function showBluesScale(params) {                   
+            for (i=0; i<params.length; i++) {
+              document.getElementById("bluesScaleTable").innerHTML = params;
+            }
+          }
+        
+
+        // Fretboard Strings
+          function stringLE(params) {                   
+            for (i=0; i<params.length; i++) {
+              document.getElementById("stringLETable").innerHTML = params;
+            }
+          }
+
+          function stringA(params) {                   
+            for (i=0; i<params.length; i++) {
+              document.getElementById("stringATable").innerHTML = params;
+            }
+          }
+
+          function stringD(params) {                   
+            for (i=0; i<params.length; i++) {
+              document.getElementById("stringDTable").innerHTML = params;
+            }
+          }
+
+          function stringG(params) {                   
+            for (i=0; i<params.length; i++) {
+              document.getElementById("stringGTable").innerHTML = params;
+            }
+          }
+
+          function stringB(params) {                   
+            for (i=0; i<params.length; i++) {
+              document.getElementById("stringBTable").innerHTML = params;
+            }
+          }
+
+          function stringHE(params) {                   
+            for (i=0; i<params.length; i++) {
+              document.getElementById("stringHETable").innerHTML = params;
+            }
+          }
+
+          // Show Scales
+          showMajorScale(majorScaleTable);
+          showMinorScale(minorScaleTable);
+          showPenMajorScale(penMajorScaleTable);
+          showPenMinorScale(penMinorScaleTable);
+          showBluesScale(bluesScaleTable);
+
+          // Show Fretboard
+          stringLE(string6);
+          stringA(string5);
+          stringD(string4);
+          stringG(string3);
+          stringB(string2);
+          stringHE(string1);
+
+          // Highlight Root Notes
+          var cell= $('#fretboard td');
+          
+          // Check for Root Note 
+          cell.each(function() {
+            var cell_value = $(this).html();
+          if (cell_value === note) {  
+             $(this).css({'background' : '#004078', 'color' : '#CCC'}); 
+             $(this).append( "&nbsp&nbsp<span class='badge badge-secondary'>root</span>" );
+
+          }
+          });
+
+
+          // using a switch statement to pass arrays to function, via Drop Down selection.
+
+            var scaleType = document.getElementById("scaleType").value;
+            switch (scaleType) { 
+              case 'minor': 
+              console.log('Minor Scale');
+                var scaleType = [alphabet[2], alphabet[3], alphabet[5], alphabet[7], alphabet[8], alphabet[10]];
+                break;
+              case 'majorPen': 
+              console.log('Major Penatonic Scale');
+                var scaleType = [alphabet[2], alphabet[4], alphabet[7], alphabet[9]];
+                break;
+              case 'minorPen': 
+              console.log('Minor Penatonic Scale');
+                var scaleType = [alphabet[3], alphabet[5], alphabet[7], alphabet[10]];
+                break;		
+              case 'blues': 
+              console.log('Blues Scale');
+                var scaleType = [alphabet[3], alphabet[5], alphabet[6], alphabet[7], alphabet[10]];
+                break;
+              default:
+                console.log('Major Scale');
+                var scaleType = [alphabet[2], alphabet[4], alphabet[5], alphabet[7], alphabet[9], alphabet[11]];
+            }
+
+            // Highlight Scale Type notes on Fretboard
+            cell.each(function() {
+            var cell_value = $(this).html();
+
+            if(jQuery.inArray(cell_value, scaleType) !== -1){
+            $(this).css({'background' : '#CCC'}); 
+          }
+          });
+
+
+          // Select row and highlight
+          $("tr").click(function () {
+            $('.selected').removeClass('selected');
+            $(this).find("td").addClass("selected"); 
+        });
+
+   // ===
+
+
+   // ====
+
+        }
+        </script>
+
+
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Fretboard</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome,</span>
+                <h2>Cheyito</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="#">Fretboard</a></li>
+                      <li><a href="#">Chord Chart</a></li>
+                      <li><a href="#">Circle of Fifths</a></li>
+
+                    </ul>
+                  </li>
+
+                </ul>
+              </div>
+                
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="images/img.jpg" alt="">Cheyito
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> Profile</a></li>
+                    <li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>Settings</span>
+                      </a>
+                    </li>
+                    <li><a href="javascript:;">Help</a></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+
+        <!-- Notification Message -->
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">1</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>Cheyito</span>
+                          <span class="time">posted 03.06.19</span>
+                        </span>
+                        <span class="message">
+                          "What's your logic, Fred?"
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+
+
+              <div class="title_right">
+
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Fretboard Visualizer</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+
+          <div class="x_content">
+                  <p>Root Note:
+
+                    <select name="myNote" id="myNote" onchange="myFretboard()">
+                      <option value="C">C</option>
+                      <option value="C#">C#</option>
+                      <option value="D">D</option>
+                      <option value="D#">D#</option>
+                      <option value="E">E</option>
+                      <option value="F">F</option>
+                      <option value="F#">F#</option>     
+                      <option value="G">G</option>      
+                      <option value="G#">G#</option>
+                      <option value="A">A</option>   
+                      <option value="A#">A#</option>         
+                      <option value="B">B</option>                
+                    </select>
+
+                    &nbsp; | &nbsp;              
+                    Scale Type:
+                        <select name="scaleType" id="scaleType" onchange="myFretboard()">
+                          <option value="major">Major</option>
+                          <option value="minor">Minor</option>
+                          <option value="majorPen">Major Penatonic</option>
+                          <option value="minorPen">Minor Penatonic</option>
+                          <option value="blues">Blues</option>
+                        </select>
+                    
+                </p>
+                 <p>&nbsp;</p>              
+                <p  hidden id="lookupTable"></p>
+                <p  hidden id="guitar"></p>
+                <p  hidden id="shiftedTable"></p>
+
+
+
+                    
+                    <table id="datatable-responsive" class="table table-bordered" cellspacing="0" width="100%">
+                      
+                      <thead>
+                        <tr class="header">
+                          <th>x</th>
+                          <th>1</th>
+                          <th>2</th>
+                          <th>3</th>
+                          <th>4</th>
+                          <th>5</th>
+                          <th>6</th>
+                          <th>7</th>
+                          <th>8</th>
+                          <th>9</th>
+                          <th>10</th>
+                          <th>11</th>
+                          <th>12</th>
+                        </tr>
+                      </thead>
+                      <tbody id="fretboard">
+                        <tr id="stringLETable" ></tr>                       
+                        <tr id="stringBTable"></tr>                       
+                        <tr id="stringGTable"></tr>                       
+                        <tr id="stringDTable"></tr>                      
+                        <tr id="stringATable"></tr>
+                        <tr id="stringHETable"> </tr>
+                      </tbody>
+                    </table>
+                    <div class="x_content">
+                      <h2>Scale Types</h2>
+                    </div>
+                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap">
+                          <thead>
+                            <tr class="header" >
+                              <th>Scale Type</th>
+                              <th>Root</th>
+                              <th>2nd</th>
+                              <th>3rd</th>
+                              <th>4th</th>
+                              <th>5th</th>
+                              <th>6th</th>
+                              <th>7th</th>
+                            </tr>
+                          </thead>
+    
+                          <p id="demo"></p>
+
+
+                          <tbody class="scales">  
+                            <tr id="majorScaleTable" ></tr>  
+                            <tr id="minorScaleTable"></tr>
+                            <tr id="penMajorScaleTable"></tr>  
+                            <tr id="penMinorScaleTable"></tr>  
+                            <tr id="bluesScaleTable"></tr>     
+                          </tbody>
+                        </table>
+                      </div>
+
+              </div>
+            </div>
+                
+
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            A Cheyito Weekend Project
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
+  </body>
+</html>
