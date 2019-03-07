@@ -1,0 +1,487 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Fretboard | Cheyito</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+        <!-- Scripts -->
+                                      <script>  
+                                            // Load myFretboard function when the page is first loaded - Default Note is C taken from the dropdown
+                                            window.onload = myFretboard;
+                                    
+                                            function myFretboard() {
+                                          
+                                            // Setting Variables for the Musical Alphabet  
+                                            // The Root Note in the Alphabet will change depending on option selection
+                                            var alphabet = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+                                            
+                                            // Lookup Table
+                                            var lookupTable = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];        
+                                    
+                                    
+                                              // Reading myNote Selected from the Drop-down Menu and assigning it to "note"
+                                              var note = document.getElementById("myNote").value;
+                                            
+                                              // Finiding the "note" position of the in the array
+                                              var keyPosition = alphabet.indexOf(note);
+                                    
+                                              // assign not as root.
+                                              var rootNote = note;
+                                              console.log(rootNote);
+                                    
+                                    
+                                              // Shift Table startig with selected root note
+                                              var x = 12 - keyPosition;
+                                              for (var i = 0; i < x; i++) {
+                                                alphabet.unshift(alphabet.pop());
+                                              }
+                                              document.getElementById("shiftedTable").innerHTML = "Shifted Table: " + alphabet;
+                                            
+                                              // var majorScale = [0, 2, 4, 5, 7, 9, 11];
+                                              // var minorScale = [0, 2, 3, 5, 7, 8, 10];
+                                              // var penMajorScale = [0, 2, 4, 7, 9];
+                                              // var penMinorScale = [0, 3, 5, 7, 10];
+                                              // var bluesScale = [0, 3, 5, 6, 7, 10];
+                                            
+                                              // Music Scales Tables
+                                               var majorScaleTable = "<td>Major</td><td>" + alphabet[0] + "</td><td>" + alphabet[2] + "</td><td>" + alphabet[4] + "</td><td>" + alphabet[5] + "</td><td>" + alphabet[7] + "</td><td>" + alphabet[9] + "</td><td>" + alphabet[11] + "</td>";
+                                               var minorScaleTable = "<td>Minor</td><td>" + alphabet[0] + "</td><td>" + alphabet[2] + "</td><td>" + alphabet[3] + "</td><td>" + alphabet[5] + "</td><td>" + alphabet[7] + "</td><td>" + alphabet[8] + "</td><td>" + alphabet[10] + "</td>";
+                                               var penMajorScaleTable = "<td>Major Pentatonic</td><td>" + alphabet[0] + "</td><td>" + alphabet[2] + "</td><td>" + alphabet[4] + "</td><td>" + alphabet[7] + "</td><td>" + alphabet[9] + "</td>" + "<td></td><td></td>";
+                                               var penMinorScaleTable = "<td>Minor Pentatonic</td><td>" + alphabet[0] + "</td><td>" + alphabet[3] + "</td><td>" + alphabet[5] + "</td><td>" + alphabet[7] + "</td><td>" + alphabet[10] + "</td>" + "<td></td><td></td>";
+                                               var bluesScaleTable = "<td>Blues</td><td>" + alphabet[0] + "</td><td>" + alphabet[3] + "</td><td>" + alphabet[5] + "</td><td>" + alphabet[6] + "</td><td>" + alphabet[7] + "</td>" + "<td>" + alphabet[10] + "</td>" + "<td></td>";
+                                              
+                                              // Fretboard Strings
+                                              var string6 = "<td>" + lookupTable[4] + "</td><td>" + lookupTable[5] + "</td><td>" + lookupTable[6] + "</td><td>"  + lookupTable[7] + "</td><td>" + lookupTable[8] + "</td><td>" + lookupTable[9] + "</td><td>" + lookupTable[10] + "</td><td>" + lookupTable[11] + "</td><td>" + lookupTable[0] + "</td><td>"  + lookupTable[1] + "</td><td>" + lookupTable[2] + "</td><td>" + lookupTable[3] + "</td><td>" + lookupTable[4] + "</td>";
+                                              var string5 = "<td>" + lookupTable[11] + "</td><td>" + lookupTable[0] + "</td><td>" + lookupTable[1] + "</td><td>"  + lookupTable[2] + "</td><td>" + lookupTable[3] + "</td><td>" + lookupTable[4] + "</td><td>" + lookupTable[5] + "</td><td>" + lookupTable[6] + "</td><td>" + lookupTable[7] + "</td><td>"  + lookupTable[8] + "</td><td>" + lookupTable[9] + "</td><td>" + lookupTable[10] +"</td><td>" + lookupTable[11] + "</td>";
+                                              var string4 = "<td>" + lookupTable[7] + "</td><td>" + lookupTable[8] + "</td><td>" + lookupTable[9] + "</td><td>"  + lookupTable[10] + "</td><td>" + lookupTable[11] + "</td><td>" + lookupTable[0] + "</td><td>"+ lookupTable[1] + "</td><td>" + lookupTable[2] + "</td><td>" + lookupTable[3] + "</td><td>"  + lookupTable[4] + "</td><td>" + lookupTable[5] + "</td><td>" + lookupTable[6] +"</td><td>" + lookupTable[7] + "</td>";
+                                              var string3 = "<td>" + lookupTable[2] + "</td><td>" + lookupTable[3] + "</td><td>" + lookupTable[4] + "</td><td>"  + lookupTable[5] + "</td><td>" + lookupTable[6] + "</td><td>" +lookupTable[7] + "</td><td>" + lookupTable[8] + "</td><td>" + lookupTable[9] + "</td><td>" + lookupTable[10] + "</td><td>"  + lookupTable[11] + "</td><td>" + lookupTable[0] + "</td><td>" + lookupTable[1] +"</td><td>" + lookupTable[2] + "</td>";
+                                              var string2 = "<td>" + lookupTable[9] + "</td><td>" + lookupTable[10] + "</td><td>" + lookupTable[11] + "</td><td>"  + lookupTable[0] + "</td><td>" + lookupTable[1] + "</td><td>" + lookupTable[2] + "</td><td>" + lookupTable[3] + "</td><td>" + lookupTable[4] + "</td><td>" + lookupTable[5] + "</td><td>"  + lookupTable[6] + "</td><td>" + lookupTable[7] + "</td><td>" + lookupTable[8] +"</td><td>" + lookupTable[9] + "</td>";
+                                              var string1 = "<td>" + lookupTable[4] + "</td><td>" + lookupTable[5] + "</td><td>" + lookupTable[6] + "</td><td>"  + lookupTable[7] + "</td><td>" + lookupTable[8] + "</td><td>" + lookupTable[9] + "</td><td>" + lookupTable[10] + "</td><td>" + lookupTable[11] + "</td><td>" + lookupTable[0] + "</td><td>"  + lookupTable[1] + "</td><td>" + lookupTable[2] + "</td><td>" + lookupTable[3] +"</td><td>" + lookupTable[4] + "</td>";
+                                    
+                                              
+                                              // Display Lookup Table and Key Position
+                                              document.getElementById("lookupTable").innerHTML = "Lookup Table: " + lookupTable;
+                                              document.getElementById("guitar").innerHTML = "Note " + note + " is in position [" + keyPosition + "] on the lookup table.";
+                                              
+                                    
+                                              // Show Scales
+                                              function showMajorScale(params) {                   
+                                                for (i=0; i<params.length; i++) {
+                                                  document.getElementById("majorScaleTable").innerHTML = params;
+                                                }
+                                              }
+                                              
+                                              function showMinorScale(params) {                   
+                                                for (i=0; i<params.length; i++) {
+                                                  document.getElementById("minorScaleTable").innerHTML = params;
+                                                }
+                                              }
+                                    
+                                              function showPenMajorScale(params) {                   
+                                                for (i=0; i<params.length; i++) {
+                                                  document.getElementById("penMajorScaleTable").innerHTML = params;
+                                                }
+                                              }
+                                    
+                                              function showPenMinorScale(params) {                   
+                                                for (i=0; i<params.length; i++) {
+                                                  document.getElementById("penMinorScaleTable").innerHTML = params;
+                                                }
+                                              }                 
+                                               function showBluesScale(params) {                   
+                                                for (i=0; i<params.length; i++) {
+                                                  document.getElementById("bluesScaleTable").innerHTML = params;
+                                                }
+                                              }
+                                            
+                                    
+                                            // Fretboard Strings
+                                              function stringLE(params) {                   
+                                                for (i=0; i<params.length; i++) {
+                                                  document.getElementById("stringLETable").innerHTML = params;
+                                                }
+                                              }
+                                    
+                                              function stringA(params) {                   
+                                                for (i=0; i<params.length; i++) {
+                                                  document.getElementById("stringATable").innerHTML = params;
+                                                }
+                                              }
+                                    
+                                              function stringD(params) {                   
+                                                for (i=0; i<params.length; i++) {
+                                                  document.getElementById("stringDTable").innerHTML = params;
+                                                }
+                                              }
+                                    
+                                              function stringG(params) {                   
+                                                for (i=0; i<params.length; i++) {
+                                                  document.getElementById("stringGTable").innerHTML = params;
+                                                }
+                                              }
+                                    
+                                              function stringB(params) {                   
+                                                for (i=0; i<params.length; i++) {
+                                                  document.getElementById("stringBTable").innerHTML = params;
+                                                }
+                                              }
+                                    
+                                              function stringHE(params) {                   
+                                                for (i=0; i<params.length; i++) {
+                                                  document.getElementById("stringHETable").innerHTML = params;
+                                                }
+                                              }
+                                    
+                                              // Show Scales
+                                              showMajorScale(majorScaleTable);
+                                              showMinorScale(minorScaleTable);
+                                              showPenMajorScale(penMajorScaleTable);
+                                              showPenMinorScale(penMinorScaleTable);
+                                              showBluesScale(bluesScaleTable);
+                                    
+                                              // Show Fretboard
+                                              stringLE(string6);
+                                              stringA(string5);
+                                              stringD(string4);
+                                              stringG(string3);
+                                              stringB(string2);
+                                              stringHE(string1);
+                                    
+                                              // Highlight Root Notes
+                                              var cell= $('#fretboard td');
+                                              
+                                              // Check for Root Note 
+                                              cell.each(function() {
+                                                var cell_value = $(this).html();
+                                              if (cell_value === note) {  
+                                                 $(this).css({'background' : '#004078', 'color' : '#CCC'}); 
+                                               //  $(this).append( " <span class='badge'>root</span>" );
+                                    
+                                              }
+                                              });
+                                    
+                                    
+                                              // using a switch statement to pass arrays to function, via Drop Down selection.
+                                    
+                                                var scaleType = document.getElementById("scaleType").value;
+                                                switch (scaleType) { 
+                                                  case 'minor': 
+                                                  console.log('Minor Scale');
+                                                    var scaleType = [alphabet[2], alphabet[3], alphabet[5], alphabet[7], alphabet[8], alphabet[10]];
+                                                    break;
+                                                  case 'majorPen': 
+                                                  console.log('Major Penatonic Scale');
+                                                    var scaleType = [alphabet[2], alphabet[4], alphabet[7], alphabet[9]];
+                                                    break;
+                                                  case 'minorPen': 
+                                                  console.log('Minor Penatonic Scale');
+                                                    var scaleType = [alphabet[3], alphabet[5], alphabet[7], alphabet[10]];
+                                                    break;		
+                                                  case 'blues': 
+                                                  console.log('Blues Scale');
+                                                    var scaleType = [alphabet[3], alphabet[5], alphabet[6], alphabet[7], alphabet[10]];
+                                                    break;
+                                                  default:
+                                                    console.log('Major Scale');
+                                                    var scaleType = [alphabet[2], alphabet[4], alphabet[5], alphabet[7], alphabet[9], alphabet[11]];
+                                                }
+                                    
+                                                // Highlight Scale Type notes on Fretboard
+                                                cell.each(function() {
+                                                var cell_value = $(this).html();
+                                    
+                                                if(jQuery.inArray(cell_value, scaleType) !== -1){
+                                                $(this).css({'background' : '#CCC'}); 
+                                              }
+                                              });
+                                    
+                                    
+                                              // Select row and highlight
+                                              $("tr").click(function () {
+                                                $('.selected').removeClass('selected');
+                                                $(this).find("td").addClass("selected"); 
+                                            });
+                                    
+                                         }
+                            </script>
+     <style>
+
+            table#fretboard th{
+                text-align: center;
+                display: table-cell;
+                table-layout: fixed;
+            }
+
+            tbody#fretboard tr {
+                table-layout: fixed;
+                text-align: center; 
+                vertical-align: middle;  
+                border-style: solid;
+                border-color: black;
+              }
+
+             
+            tbody#fretboard td {
+                table-layout: fixed;
+                width: 200px;
+                vertical-align: middle;  
+                border-style: solid;
+                border-color: black;
+              } 
+ 
+              table td {
+                padding: 0 0 !important;
+                border: brown;
+            }
+
+            .lowE {
+                    width: 78px;
+                    height: 30px;
+                    font-size: 12pt;
+                    color: white;
+                    line-height: 30px;
+                    text-align: center;
+                    background-color: red;
+                    position: absolute;
+                    right: 920px;
+                    top: 38px;
+
+            }
+     </style>                               
+	</head>
+	<body class="is-loading">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Cheyito</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Cheyito</a></li>
+							<li><a href="generic.html">Generic Page</a></li>
+                            <li><a href="elements.html">Elements Reference</a></li>
+                            <li class="active"><a href="fretboard.html">Fretboard & Scales</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>Fretboard and Scales</h1>
+								</header>
+
+
+                                <!-- Fretboard -->
+                                  
+                                  <!-- The idea for this spaghetti code project was inspired by the below reference. Thanks, dudes! --> 
+                                  
+                                  <!-- Copyright (c) 2019 primarscources
+                                    Permission is hereby granted, free of charge, to any person obtaining a copy
+                                    of this software and associated documentation files (the "Software"), to deal
+                                    in the Software without restriction, including without limitation the rights
+                                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                                    copies of the Software, and to permit persons to whom the Software is
+                                    furnished to do so, subject to the following conditions:
+                                    
+                                    The above copyright notice and this permission notice shall be included in all
+                                    copies or substantial portions of the Software.
+                                    
+                                    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                                    SOFTWARE. -->
+                                  
+
+                                            
+                                            <div>
+                                                    <h2>Fretboard</h2>
+                                                        
+                                                    <p> Select a Scale Type:
+                                                            <select name="scaleType" id="scaleType" onchange="myFretboard()">
+                                                              <option value="major">Major</option>
+                                                              <option value="minor">Minor</option>
+                                                              <option value="majorPen">Major Penatonic</option>
+                                                              <option value="minorPen">Minor Penatonic</option>
+                                                              <option value="blues">Blues</option>
+                                                            </select>
+                                                    </p>
+
+                                                  <p  hidden id="lookupTable"></p>
+                                                  <p  hidden id="guitar"></p>
+                                                  <p  hidden id="shiftedTable"></p>
+                                                 <div style="height: 350px; padding-left: 0px; position:relative;">
+                                                      <table class="fretboard" id="fretboard">
+                                                         <div class="lowE">(Low E)</div>
+                                                        <thead>
+                                                          <tr>
+                                                            <th>open</th>
+                                                            <th>1</th>
+                                                            <th>2</th>
+                                                            <th>3</th>
+                                                            <th>4</th>
+                                                            <th>5</th>
+                                                            <th>6</th>
+                                                            <th>7</th>
+                                                            <th>8</th>
+                                                            <th>9</th>
+                                                            <th>10</th>
+                                                            <th>11</th>
+                                                            <th>12</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody id="fretboard">
+                                                          <tr id="stringLETable" ></tr>                       
+                                                          <tr id="stringBTable"></tr>                       
+                                                          <tr id="stringGTable"></tr>                       
+                                                          <tr id="stringDTable"></tr>                      
+                                                          <tr id="stringATable"></tr>
+                                                          <tr id="stringHETable"> </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                      <div class="x_content">
+                                                        <h2>Scales</h2>
+
+        <P>Select a Root note:
+                                  
+        <select name="myNote" id="myNote" onchange="myFretboard()">
+          <option value="C">C</option>
+          <option value="C#">C#</option>
+          <option value="D">D</option>
+          <option value="D#">D#</option>
+          <option value="E">E</option>
+          <option value="F">F</option>
+          <option value="F#">F#</option>     
+          <option value="G">G</option>      
+          <option value="G#">G#</option>
+          <option value="A">A</option>   
+          <option value="A#">A#</option>         
+          <option value="B">B</option>                
+        </select>
+    </P>
+                                                      </div>
+                                                          <table>
+                                                            <thead>
+                                                              <tr>
+                                                                <th>Scale Type</th>
+                                                                <th>Root</th>
+                                                                <th>2nd</th>
+                                                                <th>3rd</th>
+                                                                <th>4th</th>
+                                                                <th>5th</th>
+                                                                <th>6th</th>
+                                                                <th>7th</th>
+                                                              </tr>
+                                                            </thead>
+                                      
+                                                            <p id="demo"></p>
+                                  
+                                  
+                                                            <tbody class="scales">  
+                                                              <tr id="majorScaleTable" ></tr>  
+                                                              <tr id="minorScaleTable"></tr>
+                                                              <tr id="penMajorScaleTable"></tr>  
+                                                              <tr id="penMinorScaleTable"></tr>  
+                                                              <tr id="bluesScaleTable"></tr>     
+                                                            </tbody>
+                                                          </table>
+                                                        </div>
+                                  
+                                                </div>
+                                              </div>
+                                                  
+                                  
+                                              </div>
+                                            </div>
+                                          </div>
+
+
+
+								<!-- Preformatted Code -->
+									<h2>Preformatted</h2>
+									<pre><code>i = 0;
+
+while (!deck.isInOrder()) {
+    print 'Iteration ' + i;
+    deck.shuffle();
+    i++;
+}
+
+print 'It took ' + i + ' iterations to sort the deck.';
+</code></pre>
+
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+
+						<section class="split contact">
+							<section class="alt">
+								<h3>Address</h3>
+								<p>1234 Somewhere Road #87257<br />
+								Nashville, TN 00000-0000</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="#">(000) 000-0000</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="#">info@untitled.tld</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Distributor: <a href="https://themewagon.com/">ThemeWagon</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
